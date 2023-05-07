@@ -1,8 +1,8 @@
 package com.tenpo.profit.application.ports.input;
 
-import com.tenpo.profit.infraestructure.adapters.input.rest.data.response.ProfitQueryResponse;
+import com.tenpo.profit.domain.model.Profit;
 
 public interface GetProfitsUseCase {
 
-    Iterable<ProfitQueryResponse> getProfits();
+    Iterable<Profit> getProfits();
 }

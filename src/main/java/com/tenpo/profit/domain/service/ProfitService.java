@@ -2,27 +2,26 @@ package com.tenpo.profit.domain.service;
 
 import com.tenpo.profit.application.ports.input.CalculateProfitUseCase;
 import com.tenpo.profit.application.ports.input.GetProfitsUseCase;
-import com.tenpo.profit.infraestructure.adapters.input.rest.data.response.ProfitQueryResponse;
+import com.tenpo.profit.domain.model.Profit;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase {
 
-    private List<ProfitQueryResponse> profits = new ArrayList<>();
+    private List<Profit> profits = new ArrayList<>();
 
     public ProfitService(){};
 
     @Override
-    // TODO: desacoplar ProfitQueryResponse, crear clase de domain logic
-    public ProfitQueryResponse calculateProfit(int operatorX, int operatorY) {
-        var profitCalculated = new ProfitQueryResponse(operatorX, operatorY, 10.0f);
+    public Profit calculateProfit(int operatorX, int operatorY) {
+        var profitCalculated = new Profit(operatorX, operatorY, 10);
         profits.add(profitCalculated);
         return profitCalculated;
     }
 
     @Override
-    public Iterable<ProfitQueryResponse> getProfits() {
+    public Iterable<Profit> getProfits() {
         return profits;
     }
 
