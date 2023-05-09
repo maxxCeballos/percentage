@@ -1,7 +1,10 @@
 package com.tenpo.profit.infraestructure.adapters.config;
 
+import com.tenpo.profit.application.ports.output.ProfitSQLPersistence;
 import com.tenpo.profit.domain.service.ProfitService;
-import com.tenpo.profit.infraestructure.adapters.output.percentage.service.PercentageServiceAdapter;
+import com.tenpo.profit.infraestructure.adapters.output.persistence.ProfitPersistenceAdapter;
+import com.tenpo.profit.infraestructure.adapters.output.persistence.repository.ProfitRepository;
+import com.tenpo.profit.infraestructure.adapters.output.rest.percentage.PercentageRestAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,13 +12,16 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    public PercentageServiceAdapter percentageServiceAdapter() {
-        return new PercentageServiceAdapter();
+    public PercentageRestAdapter percentageServiceAdapter() {
+        return new PercentageRestAdapter();
     }
 
     @Bean
-    public ProfitService profitService(PercentageServiceAdapter percentageServiceAdapter) {
+    ProfitPersistenceAdapter profitPersistenceAdapter(ProfitRepository profitRepository) { return new ProfitPersistenceAdapter(profitRepository); }
 
-        return new ProfitService(percentageServiceAdapter);
+    @Bean
+    public ProfitService profitService(PercentageRestAdapter percentageServiceAdapter, ProfitSQLPersistence profitSQLPersistence) {
+
+        return new ProfitService(percentageServiceAdapter, profitSQLPersistence);
     }
 }

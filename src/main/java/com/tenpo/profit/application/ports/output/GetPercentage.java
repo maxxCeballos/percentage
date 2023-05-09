@@ -1,8 +1,8 @@
 package com.tenpo.profit.application.ports.output;
 
-import com.tenpo.profit.infraestructure.adapters.output.percentage.service.PercentageDTO;
+import com.tenpo.profit.infraestructure.adapters.output.rest.percentage.data.PercentageDTO;
 
 public interface GetPercentage {
 
-    PercentageDTO getPercentage();
+    PercentageDTO getIncrementPercentage();
 }

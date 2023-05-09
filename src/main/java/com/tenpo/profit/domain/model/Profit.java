@@ -22,6 +22,14 @@ public class Profit {
         this(UUID.randomUUID().toString(), operatorX, operatorY, percentage);
     }
 
+    public Profit(String id, int operatorX, int operatorY, int percentage, float total) {
+        this.id = id;
+        this.operatorX = operatorX;
+        this.operatorY = operatorY;
+        this.percentage = percentage;
+        this.total = total;
+    }
+
     private float calculateTotal() {
         var operatorsSum = this.operatorX + this.operatorY;
         var percentageApplied =  operatorsSum * (float) this.percentage/100;
@@ -40,6 +48,8 @@ public class Profit {
     public int getOperatorY() {
         return operatorY;
     }
+
+    public int getPercentage() { return percentage; }
 
     public float getTotal() {
         return total;

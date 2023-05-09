@@ -1,4 +1,4 @@
-package com.tenpo.profit.infraestructure.adapters.output.percentage.service;
+package com.tenpo.profit.infraestructure.adapters.output.rest.percentage.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
