@@ -16,7 +16,7 @@ public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase 
 
     @Autowired
     private RedisTemplate<String, String> template;
-    private static final String STRING_KEY_PREFIX = "redi2read:strings:";
+    private static final String PERCENTAGE_CACHE_KEY = "last:percentage";
 
     private final GetPercentage percentageRestService;
     private final ProfitSQLPersistence profitSQLPersistence;
@@ -32,7 +32,7 @@ public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase 
         // TODO: check if value in cache else retrieve from percentageService
         // TODO: if retrieve from service then save percentage on cache-db
         var percentage = percentageRestService.getIncrementPercentage().getPercentage();
-        template.opsForValue().set(STRING_KEY_PREFIX, Integer.toString(percentage));
+        template.opsForValue().set(PERCENTAGE_CACHE_KEY, Integer.toString(percentage));
 
         var profitCalculated = new Profit(operatorX, operatorY, percentage);
 
