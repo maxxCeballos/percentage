@@ -7,10 +7,16 @@ import com.tenpo.profit.application.ports.output.ProfitSQLPersistence;
 import com.tenpo.profit.domain.model.Profit;
 import com.tenpo.profit.infraestructure.adapters.input.rest.data.response.ProfitQueryResponse;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.entity.ProfitE;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.ArrayList;
 
 public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase {
+
+    @Autowired
+    private RedisTemplate<String, String> template;
+    private static final String STRING_KEY_PREFIX = "redi2read:strings:";
 
     private final GetPercentage percentageRestService;
     private final ProfitSQLPersistence profitSQLPersistence;
@@ -26,6 +32,7 @@ public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase 
         // TODO: check if value in cache else retrieve from percentageService
         // TODO: if retrieve from service then save percentage on cache-db
         var percentage = percentageRestService.getIncrementPercentage().getPercentage();
+        template.opsForValue().set(STRING_KEY_PREFIX, Integer.toString(percentage));
 
         var profitCalculated = new Profit(operatorX, operatorY, percentage);
 

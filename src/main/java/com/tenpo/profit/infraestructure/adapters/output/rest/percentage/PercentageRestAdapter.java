@@ -6,7 +6,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.client.RestTemplate;
 
-@CacheConfig(cacheNames = "profitCache")
+//@CacheConfig(cacheNames = "profitCache")
 public class PercentageRestAdapter implements GetPercentage {
 
     RestTemplate client = new RestTemplate();
@@ -14,7 +14,7 @@ public class PercentageRestAdapter implements GetPercentage {
     public PercentageRestAdapter() {}
 
     @Override
-    @Cacheable(cacheNames = "profits")
+//    @Cacheable(cacheNames = "profits")
     public PercentageDTO getIncrementPercentage() {
 
 //        return client.getForObject("http://localhost:3000/percentage", PercentageDTO.class);
