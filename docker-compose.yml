@@ -1,19 +1,21 @@
-version: '3.1'
+version: '3'
 services:
-  API:
-    image: 'tenpo-api-docker.jar'
+  app:
+    build: .
     ports:
       - "8080:8080"
     depends_on:
-      PostgreSQL:
-        condition: service_healthy
+      - db
+      - cache
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_REDIS_HOST=cache
+      - SPRING_REDIS_PORT=6379
 
-  PostgreSQL:
+  db:
     image: postgres
     ports:
       - "5432:5432"
@@ -26,3 +28,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  cache:
+    image: "redis"
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
