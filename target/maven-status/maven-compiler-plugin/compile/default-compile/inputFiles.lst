@@ -11,8 +11,10 @@
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/input/rest/data/response/ProfitQueryResponse.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/input/rest/data/request/ProfitCalculateRequest.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/config/StartupListener.java
+/Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/application/ports/output/PercentageCache.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/config/RedisConfiguration.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/application/ports/output/ProfitSQLPersistence.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/domain/service/ProfitService.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/output/persistence/repository/ProfitRepository.java
+/Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/output/cache/PercentageCacheAdapter.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/application/ports/input/GetProfitsUseCase.java

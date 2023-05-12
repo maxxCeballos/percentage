@@ -3,36 +3,31 @@ package com.tenpo.profit.domain.service;
 import com.tenpo.profit.application.ports.input.CalculateProfitUseCase;
 import com.tenpo.profit.application.ports.input.GetProfitsUseCase;
 import com.tenpo.profit.application.ports.output.GetPercentage;
+import com.tenpo.profit.application.ports.output.PercentageCache;
 import com.tenpo.profit.application.ports.output.ProfitSQLPersistence;
 import com.tenpo.profit.domain.model.Profit;
-import com.tenpo.profit.infraestructure.adapters.input.rest.data.response.ProfitQueryResponse;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.entity.ProfitE;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.ArrayList;
 
 public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase {
 
-    @Autowired
-    private RedisTemplate<String, String> template;
-    private static final String PERCENTAGE_CACHE_KEY = "last:percentage";
-
     private final GetPercentage percentageRestService;
     private final ProfitSQLPersistence profitSQLPersistence;
+    private final PercentageCache percentageCache;
 
-    public ProfitService(GetPercentage percentageRestService, ProfitSQLPersistence profitSQLPersistence){
+    private static final String PERCENTAGE_CACHE_KEY = "percentage:string";
+
+    public ProfitService(GetPercentage percentageRestService, ProfitSQLPersistence profitSQLPersistence, PercentageCache percentageCache){
         this.percentageRestService = percentageRestService;
         this.profitSQLPersistence =profitSQLPersistence;
+        this.percentageCache = percentageCache;
     };
 
     @Override
     public Profit calculateProfit(int operatorX, int operatorY) {
 
-        // TODO: check if value in cache else retrieve from percentageService
-        // TODO: if retrieve from service then save percentage on cache-db
-        var percentage = percentageRestService.getIncrementPercentage().getPercentage();
-        template.opsForValue().set(PERCENTAGE_CACHE_KEY, Integer.toString(percentage));
+        var percentage = getPercentage();
 
         var profitCalculated = new Profit(operatorX, operatorY, percentage);
 
@@ -54,6 +49,32 @@ public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase 
         }
 
         return response;
+    }
+
+    private int getPercentage() {
+
+        var percentageValueCatch = percentageCache.get(PERCENTAGE_CACHE_KEY);
+
+        if (percentageValueCatch != null) {
+            return Integer.parseInt(percentageValueCatch);
+        }
+
+        var percentage = percentageRestService.getIncrementPercentage().getPercentage();
+        waitSomeTime();
+
+        percentageCache.save(PERCENTAGE_CACHE_KEY, Integer.toString(percentage));
+
+        return percentage;
+    }
+
+    private void waitSomeTime() {
+        System.out.println("Long Wait Begin");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Long Wait End");
     }
 
 }
