@@ -3,6 +3,7 @@ package com.tenpo.profit.infraestructure.adapters.input.rest;
 import com.tenpo.profit.application.ports.input.CalculateProfitUseCase;
 import com.tenpo.profit.application.ports.input.GetProfitsUseCase;
 import com.tenpo.profit.domain.model.Profit;
+import com.tenpo.profit.errors.exceptions.RequestBodyConstraintException;
 import com.tenpo.profit.infraestructure.adapters.input.rest.data.request.ProfitCalculateRequest;
 import com.tenpo.profit.infraestructure.adapters.input.rest.data.response.ProfitQueryResponse;
 import org.springframework.http.HttpStatus;
@@ -35,9 +36,19 @@ public class ProfitRestAdapter {
         // TODO: revisar el return de esta funcion, quizas deberia tener una clase response aparte de query
     ResponseEntity<ProfitQueryResponse> calculateProfit(@RequestBody ProfitCalculateRequest profitRequest) {
 
+        validateBody(profitRequest);
+
         var profit = calculateProfitUseCase.calculateProfit(profitRequest.getOperatorX(), profitRequest.getOperatorY());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(toProfitCalculateResponse(profit));
+    }
+
+    private boolean validateBody(ProfitCalculateRequest profitRequest) {
+
+        if (profitRequest.getOperatorX() == 0 && profitRequest.getOperatorY() == 0)
+            throw new RequestBodyConstraintException("Operator X and Operator Y are required");
+
+        return true;
     }
 
     private Iterable<ProfitQueryResponse> toProfitQueryResponse(Iterable<Profit> profit) {
