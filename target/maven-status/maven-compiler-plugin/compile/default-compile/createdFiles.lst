@@ -6,6 +6,8 @@ com/tenpo/profit/infraestructure/adapters/output/cache/PercentageCacheAdapter.cl
 com/tenpo/profit/infraestructure/adapters/output/rest/percentage/data/PercentageDTO.class
 com/tenpo/profit/domain/model/Profit.class
 com/tenpo/profit/infraestructure/adapters/input/rest/ProfitRestAdapter.class
+com/tenpo/profit/infraestructure/adapters/output/rest/clients/ErrorHandler.class
+com/tenpo/profit/infraestructure/adapters/output/rest/clients/Properties.class
 com/tenpo/profit/infraestructure/adapters/config/BeanConfiguration.class
 com/tenpo/profit/infraestructure/adapters/config/RedisConfiguration.class
 com/tenpo/profit/application/ports/output/GetPercentage.class

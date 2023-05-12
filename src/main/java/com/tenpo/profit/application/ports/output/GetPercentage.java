@@ -4,5 +4,5 @@ import com.tenpo.profit.infraestructure.adapters.output.rest.percentage.data.Per
 
 public interface GetPercentage {
 
-    PercentageDTO getIncrementPercentage();
+    PercentageDTO getPercentage();
 }

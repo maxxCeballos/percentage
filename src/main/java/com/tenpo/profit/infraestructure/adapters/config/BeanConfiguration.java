@@ -6,6 +6,7 @@ import com.tenpo.profit.domain.service.ProfitService;
 import com.tenpo.profit.infraestructure.adapters.output.cache.PercentageCacheAdapter;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.ProfitPersistenceAdapter;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.repository.ProfitRepository;
+import com.tenpo.profit.infraestructure.adapters.output.rest.clients.Properties;
 import com.tenpo.profit.infraestructure.adapters.output.rest.percentage.PercentageRestAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +20,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    PercentageRestAdapter percentageServiceAdapter() {
-        return new PercentageRestAdapter();
+    PercentageRestAdapter percentageServiceAdapter(Properties properties) {
+        return new PercentageRestAdapter(properties);
     }
 
     @Bean

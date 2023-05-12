@@ -1,4 +1,5 @@
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/config/BeanConfiguration.java
+/Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/output/rest/clients/ErrorHandler.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/output/persistence/ProfitPersistenceAdapter.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/output/persistence/entity/ProfitE.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/ProfitApplication.java
@@ -13,6 +14,7 @@
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/config/StartupListener.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/application/ports/output/PercentageCache.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/config/RedisConfiguration.java
+/Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/output/rest/clients/Properties.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/application/ports/output/ProfitSQLPersistence.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/domain/service/ProfitService.java
 /Users/maxi/Documents/mdev/profit/src/main/java/com/tenpo/profit/infraestructure/adapters/output/persistence/repository/ProfitRepository.java

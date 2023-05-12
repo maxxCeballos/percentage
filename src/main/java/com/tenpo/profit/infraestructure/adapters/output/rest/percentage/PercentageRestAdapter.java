@@ -1,24 +1,29 @@
 package com.tenpo.profit.infraestructure.adapters.output.rest.percentage;
 
 import com.tenpo.profit.application.ports.output.GetPercentage;
+import com.tenpo.profit.infraestructure.adapters.output.rest.clients.ErrorHandler;
+import com.tenpo.profit.infraestructure.adapters.output.rest.clients.Properties;
 import com.tenpo.profit.infraestructure.adapters.output.rest.percentage.data.PercentageDTO;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.client.RestTemplate;
 
-//@CacheConfig(cacheNames = "profitCache")
 public class PercentageRestAdapter implements GetPercentage {
 
-    RestTemplate client = new RestTemplate();
+    private RestTemplate client;
+    private Properties properties;
 
-    public PercentageRestAdapter() {}
+    public PercentageRestAdapter(Properties properties) {
+        this.client = new RestTemplate();
+        this.client.setErrorHandler(new ErrorHandler());
+
+        this.properties = properties;
+    }
 
     @Override
-//    @Cacheable(cacheNames = "profits")
-    public PercentageDTO getIncrementPercentage() {
+    public PercentageDTO getPercentage() {
 
-//        return client.getForObject("http://localhost:3000/percentage", PercentageDTO.class);
-        return new PercentageDTO(10);
+        var clientResponse = client.getForObject(properties.getBase() + properties.getUrl(), PercentageDTO.class);
+
+        return clientResponse;
 
     }
 }

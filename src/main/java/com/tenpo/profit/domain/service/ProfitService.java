@@ -7,6 +7,7 @@ import com.tenpo.profit.application.ports.output.PercentageCache;
 import com.tenpo.profit.application.ports.output.ProfitSQLPersistence;
 import com.tenpo.profit.domain.model.Profit;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.entity.ProfitE;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
@@ -54,12 +55,11 @@ public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase 
     private int getPercentage() {
 
         var percentageValueCatch = percentageCache.get(PERCENTAGE_CACHE_KEY);
-
         if (percentageValueCatch != null) {
             return Integer.parseInt(percentageValueCatch);
         }
 
-        var percentage = percentageRestService.getIncrementPercentage().getPercentage();
+        var percentage = percentageRestService.getPercentage().getPercentage();
         waitSomeTime();
 
         percentageCache.save(PERCENTAGE_CACHE_KEY, Integer.toString(percentage));
