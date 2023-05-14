@@ -64,7 +64,7 @@ public class RedisConfiguration {
 
     @PostConstruct
     public void clearCache() {
-        System.out.println("In Clear Cache");
+        System.out.println("In redisHost: " + redisHost + " redisPort: " + redisPort);
         Jedis jedis = new Jedis(redisHost, redisPort, 1000);
         jedis.flushAll();
         jedis.close();
