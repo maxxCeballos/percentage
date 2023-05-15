@@ -4,6 +4,9 @@ import com.tenpo.profit.application.ports.output.ProfitSQLPersistence;
 import com.tenpo.profit.domain.model.Profit;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.entity.ProfitE;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.repository.ProfitRepository;
+import org.springframework.scheduling.annotation.Async;
+
+import java.util.concurrent.CompletableFuture;
 
 
 public class ProfitPersistenceAdapter implements ProfitSQLPersistence {
@@ -15,11 +18,17 @@ public class ProfitPersistenceAdapter implements ProfitSQLPersistence {
     }
 
     @Override
-    public void saveProfit(Profit profit) {
-        var profitEntity = new ProfitE(profit.getId(), profit.getOperatorX(), profit.getOperatorY(), profit.getPercentage(), profit.getTotal());
-        var profitSaved = profitRepository.save(profitEntity);
-        var message = "el total del profit saved is " + profitSaved;
-        System.out.println(message);
+    @Async
+    public CompletableFuture<Boolean> saveProfit(Profit profit) {
+
+        try {
+            Thread.sleep(10000L);
+            var profitEntity = new ProfitE(profit.getId(), profit.getOperatorX(), profit.getOperatorY(), profit.getPercentage(), profit.getTotal());
+            var profitSaved = profitRepository.save(profitEntity);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return CompletableFuture.completedFuture(true);
     }
 
     @Override
