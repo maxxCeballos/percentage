@@ -40,9 +40,9 @@ public class ProfitService implements CalculateProfitUseCase, GetProfitsUseCase 
     }
 
     @Override
-    public Iterable<Profit> getProfits() {
+    public Iterable<Profit> getProfits(int pageNo, int pageSize) {
 
-        var profitsEntities = profitSQLPersistence.getProfits();
+        var profitsEntities = profitSQLPersistence.getProfits(pageNo, pageSize);
 
         var response = new ArrayList<Profit>();
 

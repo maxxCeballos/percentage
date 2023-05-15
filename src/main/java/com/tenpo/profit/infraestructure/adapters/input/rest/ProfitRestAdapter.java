@@ -25,9 +25,12 @@ public class ProfitRestAdapter {
     }
 
     @GetMapping
-    Iterable<ProfitQueryResponse> getProfits() {
+    Iterable<ProfitQueryResponse> getProfits(
+        @RequestParam(defaultValue = "0") Integer pageNo,
+        @RequestParam(defaultValue = "10") Integer pageSize
+    ) {
 
-        var profits = getProfitsUseCase.getProfits();
+        var profits = getProfitsUseCase.getProfits(pageNo, pageSize);
 
         return toProfitQueryResponse(profits);
     }

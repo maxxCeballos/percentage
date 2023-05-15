@@ -4,5 +4,5 @@ import com.tenpo.profit.domain.model.Profit;
 
 public interface GetProfitsUseCase {
 
-    Iterable<Profit> getProfits();
+    Iterable<Profit> getProfits(int pageNo, int pageSize);
 }

@@ -9,5 +9,5 @@ public interface ProfitSQLPersistence {
 
     CompletableFuture<Boolean> saveProfit(Profit profit);
 
-    Iterable<ProfitE> getProfits();
+    Iterable<ProfitE> getProfits(int pageNo, int pageSize);
 }

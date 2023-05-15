@@ -4,6 +4,8 @@ import com.tenpo.profit.application.ports.output.ProfitSQLPersistence;
 import com.tenpo.profit.domain.model.Profit;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.entity.ProfitE;
 import com.tenpo.profit.infraestructure.adapters.output.persistence.repository.ProfitRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 
 import java.util.concurrent.CompletableFuture;
@@ -32,7 +34,10 @@ public class ProfitPersistenceAdapter implements ProfitSQLPersistence {
     }
 
     @Override
-    public Iterable<ProfitE> getProfits() {
-        return profitRepository.findAll();
+    public Iterable<ProfitE> getProfits(int pageNo, int pageSize) {
+
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+
+        return profitRepository.findAll(paging);
     }
 }

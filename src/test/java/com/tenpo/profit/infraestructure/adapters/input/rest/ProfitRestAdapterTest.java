@@ -68,7 +68,7 @@ class ProfitRestAdapterTest {
         var expectedResponse = new ArrayList<ProfitQueryResponse>();
         expectedResponse.add(new ProfitQueryResponse("123", 2, 2, 4.4f));
 
-        given(getProfitsUseCase.getProfits()).willReturn(useCaseResponse);
+        given(getProfitsUseCase.getProfits(0, 10)).willReturn(useCaseResponse);
 
         // when
         MockHttpServletResponse response =
@@ -88,7 +88,7 @@ class ProfitRestAdapterTest {
         // given
         var useCaseResponse = new ArrayList<Profit>();
 
-        given(getProfitsUseCase.getProfits()).willReturn(useCaseResponse);
+        given(getProfitsUseCase.getProfits(0, 10)).willReturn(useCaseResponse);
 
         // when
         MockHttpServletResponse response =
