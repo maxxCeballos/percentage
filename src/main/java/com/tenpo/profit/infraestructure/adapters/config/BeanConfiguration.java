@@ -1,5 +1,6 @@
 package com.tenpo.profit.infraestructure.adapters.config;
 
+import com.tenpo.profit.application.ports.output.GetPercentage;
 import com.tenpo.profit.application.ports.output.PercentageCache;
 import com.tenpo.profit.application.ports.output.ProfitSQLPersistence;
 import com.tenpo.profit.domain.service.ProfitService;
@@ -8,8 +9,12 @@ import com.tenpo.profit.infraestructure.adapters.output.persistence.ProfitPersis
 import com.tenpo.profit.infraestructure.adapters.output.persistence.repository.ProfitRepository;
 import com.tenpo.profit.infraestructure.adapters.output.rest.clients.Properties;
 import com.tenpo.profit.infraestructure.adapters.output.rest.percentage.PercentageRestAdapter;
+import com.tenpo.profit.infraestructure.adapters.output.rest.percentage.data.PercentageDTO;
+import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import static org.mockito.Mockito.when;
 
 @Configuration
 public class BeanConfiguration {
@@ -20,8 +25,15 @@ public class BeanConfiguration {
     }
 
     @Bean
-    PercentageRestAdapter percentageServiceAdapter(Properties properties) {
-        return new PercentageRestAdapter(properties);
+    PercentageRestAdapter percentageServiceAdapter() throws Exception {
+        PercentageRestAdapter remoteService = Mockito.mock(PercentageRestAdapter.class);
+
+        when(remoteService.getPercentage())
+                .thenThrow(new RuntimeException("Remote Exception 1"))
+                .thenThrow(new RuntimeException("Remote Exception 2"))
+                .thenReturn(new PercentageDTO(10));
+        
+        return remoteService;
     }
 
     @Bean
