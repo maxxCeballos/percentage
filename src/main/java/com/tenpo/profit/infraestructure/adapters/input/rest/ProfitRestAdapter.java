@@ -33,7 +33,7 @@ public class ProfitRestAdapter {
     }
 
     @PostMapping
-        // TODO: revisar el return de esta funcion, quizas deberia tener una clase response aparte de query
+        // TODO: revisar el return de esta funcion, deberia tener una clase response aparte de query
     ResponseEntity<ProfitQueryResponse> calculateProfit(@RequestBody ProfitCalculateRequest profitRequest) {
 
         validateBody(profitRequest);

@@ -5,6 +5,8 @@ public class ProfitCalculateRequest {
     private int operatorX;
     private int operatorY;
 
+    public ProfitCalculateRequest() {}
+
     public ProfitCalculateRequest(int operatorX, int operatorY) {
         this.operatorX = operatorX;
         this.operatorY = operatorY;
