@@ -54,11 +54,11 @@
 					"query": [
 						{
 							"key": "pageSize",
-							"value": "1"
+							"value": "2"
 						},
 						{
 							"key": "pageNo",
-							"value": "1"
+							"value": "0"
 						}
 					]
 				}
